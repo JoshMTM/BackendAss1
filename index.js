@@ -5,8 +5,10 @@ const PORT = 4000;
 const Teams = require("./models/team");
 const Players = require("./models/player");
 const { Op } = require("sequelize");
+const authRouter = require("./router/auth");
 
 app.use(jsonParser);
+app.use(authRouter);
 
 // GET all teams `localhost:4000/teams`
 app.get("/teams", async (req, res, next) => {

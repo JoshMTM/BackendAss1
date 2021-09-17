@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const { toJWT, toData } = require("../auth/jwt");
 const User = require("../models").user;
+const router = new Router();
+
 const bcrypt = require("bcrypt");
 const AuthMiddleware = require("../auth/middleware");
 
-app.post("/login", AuthMiddleware, async (req, res, next) => {
+router.post("/login", AuthMiddleware, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
