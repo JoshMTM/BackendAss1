@@ -6,7 +6,7 @@ const router = new Router();
 const bcrypt = require("bcrypt");
 const AuthMiddleware = require("../auth/middleware");
 
-router.post("/login", AuthMiddleware, async (req, res, next) => {
+router.post("/users/login", AuthMiddleware, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
