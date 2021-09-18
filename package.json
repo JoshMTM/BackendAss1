@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
     "init": "^0.1.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"
   }
