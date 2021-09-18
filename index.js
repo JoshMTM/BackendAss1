@@ -6,6 +6,7 @@ const Teams = require("./models/team");
 const Players = require("./models/player");
 const { Op } = require("sequelize");
 const authRouter = require("./router/auth");
+const authMiddleware = require("./auth/middleware");
 
 app.use(jsonParser);
 app.use(authRouter);
@@ -27,11 +28,15 @@ app.get("/teams", async (req, res, next) => {
 
 // Create a new player
 app.post("/players", async (req, res, next) => {
-  const { name, nationality } = req.body;
-  if (!name || !nationality) {
+  const { name, age, teamId } = req.body;
+  if (!name || !age || name === " " || age === " ") {
     res.status(400).send("missing parameters");
   } else {
-    const player = await Players.create(req.body);
+    const player = await Players.create({
+      name,
+      age,
+      teamId,
+    });
     res.send(player);
     next(e);
   }
@@ -77,6 +82,23 @@ app.get("/payers/:age/", async (req, res, next) => {
     const player = await Players.findAll({ where: { age: { [Op.gte]: age } } });
     res.send(player);
   } catch (e) {
+    next(e);
+  }
+});
+
+// delete a specific player by id
+
+app.delete("/players/:id", async (req, res, next) => {
+  try {
+    const playerId = parseInt(req.params.id);
+    const player = await Player.findByPk(playerId);
+    if (!player) {
+      return res.status(404).send({ message: "Player not found" });
+    }
+    player.destroy();
+    res.status(204).send();
+  } catch (e) {
+    console.log(e.message);
     next(e);
   }
 });

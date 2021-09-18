@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      team.belongsTo(models.user);
-      team.belongsTo(models.player);
+      team.hasMany(models.player);
     }
   }
   team.init(
@@ -17,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       country: DataTypes.STRING,
       titles: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

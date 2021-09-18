@@ -10,12 +10,11 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       age: {
         type: Sequelize.INTEGER,
-      },
-      teamId: {
-        Type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
